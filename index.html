@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Benkyou-bud - Dashboard</title>
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
           
@@ -70,35 +69,18 @@
             font-size: 2em;
         }
         
-        #recommendations, #recommendationsButton {
-            color: red;
-        }
-        #recommendationsButton:hover {
-            background-color:  rgba(128, 32, 0, 0.5);
-        }
+        #recommendations, #recommendationsButton {color: red;}
+        #recommendationsButton:hover {background-color:  rgba(128, 32, 0, 0.5);}
         
-        #tasks, #tasksButton {
-            color: mediumpurple;
-        }
-        #tasksButton:hover {
-            transition: 0.2s;
-            background-color: rgba(41, 20, 82,0.5)
-        }
+        #tasks, #tasksButton {color: mediumpurple;}
+        #tasksButton:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
         
-        #calendar, #calendarButton {
-            color: lime;
-        }
-        #calendarButton:hover {
-            transition: 0.2s;
-            background-color: rgba(0, 102, 0, 0.5);
-        }
+        #calendar, #calendarButton {color: lime;}
+        #calendarButton:hover {transition: 0.2s;background-color: rgba(0, 102, 0, 0.5);}
         
-        #nearest-events,#nearest-eventsButton {
-            color: blue;
-        }
-        #nearest-eventsButton:hover {
-            background-color: rgba(0, 0, 128,0.5);
-        }
+        #nearest-events,#nearest-eventsButton {color: blue;}
+        #nearest-eventsButton:hover {background-color: rgba(0, 0, 128,0.5);}
+        
         #content-pane {
 			margin-left:20vw;
 			width:60vw;
@@ -151,17 +133,8 @@
 	</nav>
     
     <canvas width="500px" id="right-canvas"></canvas>
-
 	<canvas width="500px" id="left-canvas"></canvas>
-	
-    <section id="notification-bar">
-		
-	</section>
-    
-    <section id="pagenav">
-        
-    </section>
-    
+
     <section id="buttons-pane">
         <ul>
             <li id="nearest-eventsButton" class="waves-effect waves-light"><span class="fa fa-exclamation-circle"></span>Nearest Events</li>
@@ -171,7 +144,6 @@
         </ul>
     </section>
     <section id="content-pane">
-        
         <section id="recommendations">
         	<div id="nav-clearance">...</div>
             Recommendations go here
