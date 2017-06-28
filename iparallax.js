@@ -1,4 +1,3 @@
-$("#content-pane").css({"background-color":"black"});
 
 //Layer constructor function
 var layer = function(param) {
@@ -49,7 +48,7 @@ var startup = function() {
 	llayers.push(new layer({
 		height: left.height,
 		width: right.width,
-		num_squares: 60,
+		num_squares: 50,
 		max_side: 30,
 		min_side: 25,
 		max_gray: 220,
@@ -65,7 +64,7 @@ var startup = function() {
 	rlayers.push(new layer({
 		height: left.height,
 		width: right.width,
-		num_squares: 60,
+		num_squares: 50,
 		max_side: 30,
 		min_side: 25,
 		max_gray: 220,
@@ -184,8 +183,11 @@ var startup = function() {
 	drawCanvas();
 };
 
-var drawLayer = function(l, context) {
+var drawLayer = function(l, e) {
+    var context = e.getContext("2d");
     var scrollTop = $(window).scrollTop();
+    var offs = $("#content-pane").offset();
+
     for(var i=0;i<l.elem.length;i++) {
         var r = Math.round(l.elem[i].r);
         var g = Math.round(l.elem[i].g);
@@ -198,6 +200,8 @@ var drawLayer = function(l, context) {
         if(g<0)g=0;
         context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
         context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
+        //if(!($(e).offset().left+l.elem[i].x+l.elem[i].s< offs.left || $(e).offset().left+l.elem[i].x>offs.right))
+        //    stackBlurCanvasRGBA("left-canvas",l.elem[i].x,l.elem[i].y,l.elem[i].s,l.elem[i].s,3);
     }
 };
 
@@ -209,8 +213,8 @@ var drawCanvas = function() {
     rc.clearRect(0,0,right.width,right.height);
     lc.clearRect(0,0,left.width,left.height);
     for(var i=0;i<rlayers.length;i++) {
-        drawLayer(rlayers[i], rc);
-        drawLayer(llayers[i], lc);
+        drawLayer(rlayers[i], right);
+        drawLayer(llayers[i], left);
     }
 };
 
@@ -233,11 +237,11 @@ var drawSquares = function(color) {
                     r.b_grad = (0 - r.b)/REP;
                     break;
                 case "lime":
-                    l.g_grad = (255 - l.r)/REP;
-                    r.g_grad = (255 - r.r)/REP;
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
 
-                    l.r_grad = (0 - l.g)/REP;
-                    r.r_grad = (0 - r.g)/REP;
+                    l.r_grad = (0 - l.r)/REP;
+                    r.r_grad = (0 - r.r)/REP;
 
                     l.b_grad = (0 - l.b)/REP;
                     r.b_grad = (0 - r.b)/REP;
@@ -253,14 +257,14 @@ var drawSquares = function(color) {
                     r.b_grad = (219 - r.b)/REP;
                     break;
                 case "blue":
-                    l.b_grad = (255 - l.r)/REP;
-                    r.b_grad = (255 - r.r)/REP;
+                    l.b_grad = (255 - l.b)/REP;
+                    r.b_grad = (255 - r.b)/REP;
 
                     l.g_grad = (0 - l.g)/REP;
                     r.g_grad = (0 - r.g)/REP;
 
-                    l.r_grad = (0 - l.b)/REP;
-                    r.r_grad = (0 - r.b)/REP;
+                    l.r_grad = (0 - l.r)/REP;
+                    r.r_grad = (0 - r.r)/REP;
                     break;
                 case "original":
                     resetFlag = true;
@@ -334,7 +338,6 @@ var drawSquares = function(color) {
 };
 
 function resetSquares() {
-    console.log("Resetting squares");
     drawSquares("original");
 }
 
@@ -359,43 +362,41 @@ $("#buttons-pane").mouseleave(function(){
 });
 
 // Attach event handler for each button
-$("#calendarButton").click(function(){
-    var offset = $("#calendar").offset().top;
+$("#about-me-button").click(function(){
+    var offset = $("#about-me").offset().top;
     var st = $('html, body').attr('scrollTop');
     $('html, body').animate({"scrollTop": offset},1000);
     
 });
-$("#calendarButton").mouseenter(function(){
-    console.log("Mouse entered calendarButton");
-    drawSquares("lime");
-});
-
-$("#recommendationsButton").click(function(){
-    var offset = $("#calendar").offset().top;
-    var st = $('html, body').attr('scrollTop');
-    $('html, body').animate({"scrollTop": $("#recommendations").offset().top},1000);
-});
-$("#recommendationsButton").mouseenter(function(){
-    console.log("Mouse entered recommendationsButton");
+$("#about-me-button").mouseenter(function(){
     drawSquares("red");
 });
 
-$("#tasksButton").click(function(){
-    var offset = $("#calendar").offset().top;
+$("#home-button").click(function(){
+    var offset = $("#home").offset().top;
     var st = $('html, body').attr('scrollTop');
-    $('html, body').animate({"scrollTop": $("#tasks").offset().top},1000);
+    $('html, body').animate({"scrollTop": $("#home").offset().top},1000);
 });
-$("#tasksButton").mouseenter(function(){
+$("#home-button").mouseenter(function(){
+    drawSquares("lime");
+});
+
+$("#contact-button").click(function(){
+    var offset = $("#contact-me").offset().top;
+    var st = $('html, body').attr('scrollTop');
+    $('html, body').animate({"scrollTop": $("#contact-me").offset().top},1000);
+});
+$("#contact-button").mouseenter(function(){
     console.log("Mouse entered tasksButton");
     drawSquares("mediumpurple");
 });
 
-$("#nearest-eventsButton").click(function(){
-    var offset = $("#calendar").offset().top;
+$("#stuff-button").click(function(){
+    var offset = $("#stuff").offset().top;
     var st = $('html, body').attr('scrollTop');
-    $('html, body').animate({"scrollTop": $("#nearest-events").offset().top},1000);
+    $('html, body').animate({"scrollTop": $("#stuff").offset().top},1000);
 });
-$("#nearest-eventsButton").mouseenter(function(){
+$("#stuff-button").mouseenter(function(){
     console.log("Mouse entered nearest events button");
     drawSquares("blue");
 });

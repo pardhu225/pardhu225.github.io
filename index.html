@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Benkyou-bud - Dashboard</title>
+	<title>Pardhu Chowdary - Home Page</title>
+    <link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
           
@@ -11,36 +12,9 @@
 			padding: 0;
 			margin:0;
 			height:100%;
-            aoverflow: hidden;
+            background-color: black;
         }
         
-        /* style for the navigation bar */
-		nav {
-			position: fixed;
-			left:0;
-			top:0;
-			height: 2em;
-			background-color: #999;
-			width: 100%;
-			overflow: hidden;
-		}
-		nav ul {
-			list-style-type: none;
-			padding:0;
-			margin:0;
-		}
-		nav ul li {
-			letter-spacing: 0.2px;
-			text-transform: capitalize;
-			display: inline-block;
-			padding: 0.4em 0.7em;
-			cursor: pointer;
-		}
-		nav ul li:hover {
-			transition: 0.3s;
-			color: white;
-			background-color: #222;
-		}
 		#nav-clearance {
 			height:2em;
 		}
@@ -61,35 +35,33 @@
             background-color: black;
 		}
         
-        #recommendations, #tasks, #calendar,
-        #nearest-events{
+        #home, #about-me, #contact-me,
+        #stuff{
             height: 100vh;
-            background-color: black;
             text-align: center;
-            font-size: 2em;
+            font-size: 1em;
         }
         
-        #recommendations, #recommendationsButton {color: red;}
-        #recommendationsButton:hover {background-color:  rgba(128, 32, 0, 0.5);}
+        #home, #home-button {color: lime;}
+        #home-button:hover {background-color:  rgba(128, 32, 0, 0.5);}
         
-        #tasks, #tasksButton {color: mediumpurple;}
-        #tasksButton:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
+        #contact-me, #contact-button {color: mediumpurple;}
+        #contact-button:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
         
-        #calendar, #calendarButton {color: lime;}
-        #calendarButton:hover {transition: 0.2s;background-color: rgba(0, 102, 0, 0.5);}
+        #about-me, #about-me-button {color: red;}
+        #about-me-button:hover {transition: 0.2s;background-color: rgba(0, 102, 0, 0.5);}
         
-        #nearest-events,#nearest-eventsButton {color: blue;}
-        #nearest-eventsButton:hover {background-color: rgba(0, 0, 128,0.5);}
+        #stuff,#stuff-button {color: blue;}
+        #stuff-button:hover {background-color: rgba(0, 0, 128,0.5);}
         
         #content-pane {
 			margin-left:20vw;
 			width:60vw;
 			margin-right: 20vw;
-            background-color: black; 
 		}
         #buttons-pane { 
             position: fixed;
-            left:70vw;
+            left:80vw;
             top:20vh;
             width:20vw;
         }
@@ -116,51 +88,84 @@
             left:0;
             top:0;
         }
+
+        #heading {
+            font-family: 'Alef';
+            font-variant: small-caps;
+            color: lime;
+            font-size: 1.5em;
+        }
+        #banner {
+            margin-top:30vh;
+        }
+        #banner-img {
+            margin-top: 15%;
+        }
+        #banner-img img {
+            height: 150px;
+            width: 150px;
+        }
+        #about-me #specs {
+            font-size: 1.3em;
+        }
+        #contact-me {
+            height: auto;
+            padding: 20px;
+            font-size: 1.3em;
+        }
 	</style>
     
 </head>
 <body>
-	<nav>
-		<ul>
-			<li>Go to courses</li>
-			<li>DropScreen</li>
-			<li>Manage My Account</li>
-			<li>Statistics</li>
-			<li>About</li>
-			<li>Contact Us</li>
-			<li>Some other menu item</li>
-		</ul>
-	</nav>
     
-    <canvas width="500px" id="right-canvas"></canvas>
-	<canvas width="500px" id="left-canvas"></canvas>
+    <canvas width="500px" id="right-canvas" crossorigin="anonymous"></canvas>
+	<canvas width="500px" id="left-canvas" crossorigin="anonymous"></canvas>
 
     <section id="buttons-pane">
         <ul>
-            <li id="nearest-eventsButton" class="waves-effect waves-light"><span class="fa fa-exclamation-circle"></span>Nearest Events</li>
-            <li id="calendarButton" class="waves-effect waves-light"><span class="fa fa-calendar" style="float: left"></span>Calendar</li>
-            <li id="tasksButton" class="waves-effect waves-light"><span class="fa fa-tasks"></span>Tasks</li>
-            <li id="recommendationsButton" class="waves-effect waves-light"><span class="fa fa-thumbs-up" style="color:red"></span>Recommendations</li>
+            <li id="home-button" class="waves-effect waves-light"><span class="fa fa-home"></span>Home</li>
+            <li id="about-me-button" class="waves-effect waves-light"><span class="fa fa-hand-peace-o"></span>About Me</li>
+            <li id="contact-button" class="waves-effect waves-light"><span class="fa fa-handshake-o"></span>Contact Me</li>
+            <li id="stuff-button" class="waves-effect waves-light"><span class="fa fa-exclamation-circle"></span>IIT ka maal</li>
         </ul>
     </section>
     <section id="content-pane">
-        <section id="recommendations">
+        <section id="home">
         	<div id="nav-clearance">...</div>
-            Recommendations go here
+            <div id="banner">
+                <div id="heading">
+                    Pardhu Chowdary
+                </div>
+            </div>
         </section>
-        <section id="calendar">
+        <section id="about-me">
             <div id="nav-clearance">...</div>
-            Calendar comes here
+            <div id="specs">
+                <div id="banner-img">
+                    <img>
+                </div>
+
+                Hey there! I am Pardhu Chowdary. I am currently pursuing B.Tech in the branch of Computer Science and Engineering
+                at IIT, Kanpur.<br><br>
+                Java: Multi-threading, Applets, Relfection
+                WebDev using PHP
+                Machine Learning
+
+            </div>
         </section>
-        <section id="tasks">
+        <section id="contact-me">
             <div id="nav-clearance">...</div>
-            Tasks go here
+            <div>Email</div>
+            <div>Address</div>
+            <div>Facebook</div>
+            <div>GitHub</div>
         </section>
-        <section id="nearest-events">
+        <section id="stuff">
             <div id="nav-clearance">...</div>
-            Nearest events will bedisplayed here
+            Stuff will bedisplayed here
         </section>
     </section>
+    <script type="text/javascript" src='StackBlur.js'></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="iparallax.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
