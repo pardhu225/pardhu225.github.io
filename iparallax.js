@@ -181,6 +181,18 @@ var startup = function() {
 
 	$(window).scroll(drawCanvas);
 	drawCanvas();
+    setTimeout(function(){
+        $("#home-button").mouseenter();
+        setTimeout(function(){
+            $("#about-me-button").mouseenter();
+            setTimeout(function(){
+                $("#contact-button").mouseenter();
+                setTimeout(function(){
+                    $("#stuff").mouseenter();
+                },200);
+            },200);
+        },200);
+    },200);
 };
 
 var drawLayer = function(l, e) {
@@ -200,8 +212,6 @@ var drawLayer = function(l, e) {
         if(g<0)g=0;
         context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
         context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
-        //if(!($(e).offset().left+l.elem[i].x+l.elem[i].s< offs.left || $(e).offset().left+l.elem[i].x>offs.right))
-        //    stackBlurCanvasRGBA("left-canvas",l.elem[i].x,l.elem[i].y,l.elem[i].s,l.elem[i].s,3);
     }
 };
 
@@ -368,7 +378,7 @@ function setIntervalX(callback, delay, repetitions, endf) {
 
 // Reset the squares only when mouse leaves the button-pane
 $("#buttons-pane").mouseleave(function(){
-    resetSquares();
+    //resetSquares();
 });
 
 // Attach event handler for each button
@@ -380,6 +390,7 @@ $("#about-me-button").click(function(){
 });
 $("#about-me-button").mouseenter(function(){
     drawSquares("white");
+    $("#about-me-button").animate({"background-color":"rgba(255 , 255, 255, 0.5)"},200);
 });
 
 $("#home-button").click(function(){
@@ -389,6 +400,7 @@ $("#home-button").click(function(){
 });
 $("#home-button").mouseenter(function(){
     drawSquares("lime");
+    $("#home-button").animate({"background-color":"rgba(32, 128, 0, 0.5)"},200);
 });
 
 $("#contact-button").click(function(){
@@ -397,7 +409,6 @@ $("#contact-button").click(function(){
     $('html, body').animate({"scrollTop": $("#contact-me").offset().top},1000);
 });
 $("#contact-button").mouseenter(function(){
-    console.log("Mouse entered tasksButton");
     drawSquares("mediumpurple");
 });
 
@@ -407,6 +418,5 @@ $("#stuff-button").click(function(){
     $('html, body').animate({"scrollTop": $("#stuff").offset().top},1000);
 });
 $("#stuff-button").mouseenter(function(){
-    console.log("Mouse entered nearest events button");
     drawSquares("blue");
 });
