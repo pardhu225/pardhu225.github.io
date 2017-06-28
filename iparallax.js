@@ -52,9 +52,9 @@ var startup = function() {
 		max_side: 30,
 		min_side: 25,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.5,
 		parallax: 0.01,
         grad: function(){},
 		randomFunction: function() {
@@ -68,9 +68,9 @@ var startup = function() {
 		max_side: 30,
 		min_side: 25,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.5,
 		parallax: 0.01,
         grad: function(){},
 		randomFunction: function() {
@@ -86,9 +86,9 @@ var startup = function() {
 		max_side: 25,
 		min_side: 15,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.25,
         grad: function(){},
 		randomFunction: function() {
@@ -102,9 +102,9 @@ var startup = function() {
 		max_side: 25,
 		min_side: 15,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.25,
 		randomFunction: function() {
 			return 1-Math.random()*Math.random();
@@ -119,9 +119,9 @@ var startup = function() {
 		max_side: 15,
 		min_side: 7,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.5,
         grad: function(){},
 		randomFunction: function() {
@@ -135,9 +135,9 @@ var startup = function() {
 		max_side: 15,
 		min_side: 7,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.5,
         grad: function(){},
 		randomFunction: function() {
@@ -153,9 +153,9 @@ var startup = function() {
 		max_side: 7,
 		min_side: 0,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.75,
         grad: function(){},
 		randomFunction: function() {
@@ -169,9 +169,9 @@ var startup = function() {
 		max_side: 7,
 		min_side: 0,
 		max_gray: 220,
-		min_gray: 175,
-		max_opacity: 0.6,
-		min_opacity: 0.2,
+		min_gray: 200,
+		max_opacity: 0.8,
+		min_opacity: 0.4,
 		parallax: 0.75,
         grad: function(){},
 		randomFunction: function() {
@@ -245,6 +245,16 @@ var drawSquares = function(color) {
 
                     l.b_grad = (0 - l.b)/REP;
                     r.b_grad = (0 - r.b)/REP;
+                    break;
+                case "white":
+                    l.g_grad = (200 - l.g)/REP;
+                    r.g_grad = (200 - r.g)/REP;
+
+                    l.r_grad = (200 - l.r)/REP;
+                    r.r_grad = (200 - r.r)/REP;
+
+                    l.b_grad = (200 - l.b)/REP;
+                    r.b_grad = (200 - r.b)/REP;
                     break;
                 case "mediumpurple":
                     l.r_grad = (147 - l.r)/REP;
@@ -369,7 +379,7 @@ $("#about-me-button").click(function(){
     
 });
 $("#about-me-button").mouseenter(function(){
-    drawSquares("red");
+    drawSquares("white");
 });
 
 $("#home-button").click(function(){

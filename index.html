@@ -2,11 +2,15 @@
 <html>
 <head>
 	<title>Pardhu Chowdary - Home Page</title>
-    <link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
           
 	<style type="text/css">
+        @font-face {
+            font-family: "Simplifica";
+            src: url(css/simplifica.woff) format("truetype");
+        }
 		body {
 			font-family: arial;
 			padding: 0;
@@ -17,6 +21,7 @@
         
 		#nav-clearance {
 			height:2em;
+            text-align: center !important;
 		}
         
         /* The styles for the parallax canvas */
@@ -43,13 +48,13 @@
         }
         
         #home, #home-button {color: lime;}
-        #home-button:hover {background-color:  rgba(128, 32, 0, 0.5);}
+        #home-button:hover {background-color:  rgba(32, 128, 0, 0.5);}
         
         #contact-me, #contact-button {color: mediumpurple;}
         #contact-button:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
         
-        #about-me, #about-me-button {color: red;}
-        #about-me-button:hover {transition: 0.2s;background-color: rgba(0, 102, 0, 0.5);}
+        #about-me, #about-me-button {color: white;}
+        #about-me-button:hover {transition: 0.2s;background-color: rgba(255 , 255, 255, 0.5);}
         
         #stuff,#stuff-button {color: blue;}
         #stuff-button:hover {background-color: rgba(0, 0, 128,0.5);}
@@ -90,20 +95,24 @@
         }
 
         #heading {
-            font-family: 'Alef';
+            font-family: 'Simplifica';
             font-variant: small-caps;
             color: lime;
-            font-size: 1.5em;
+            font-size: 5em;
+            letter-spacing: 5px;
         }
         #banner {
             margin-top:30vh;
         }
         #banner-img {
-            margin-top: 15%;
+            margin-top: 10%;
+            margin-bottom: 5%; 
         }
         #banner-img img {
             height: 150px;
             width: 150px;
+            border-radius: 75px;
+            border: solid 1px white;
         }
         #about-me #specs {
             font-size: 1.3em;
@@ -111,8 +120,36 @@
         #contact-me {
             height: auto;
             padding: 20px;
-            font-size: 1.3em;
+            font-size: 1.5em;
+            text-align: left;
         }
+        #contact-me div {
+            margin: 15px;
+            padding-left: 25px;
+            text-align: right;
+        }
+        ol li {
+            text-align: left;
+            color: black;
+            background-color: #ccc;
+            margin: 7px;
+            padding: 7px;
+            list-style-type: none;
+        }
+        ol li:nth-child(even) {
+            background-color: #aaa;
+        }
+        #tech-int {
+            display: inline-table;
+            width: 45%;
+        }
+        #gen-int {
+            display: inline-table;
+            width:45%;
+        }
+        /*ol li:before {content: counter(li); color: mediumpurple;
+        display: inline-block; width: 1em; margin-left: -1.5em;
+        margin-right: 0.5em; text-align: right; direction: rtl}
 	</style>
     
 </head>
@@ -145,20 +182,53 @@
                     <img>
                 </div>
 
-                Hey there! I am Pardhu Chowdary. I am currently pursuing B.Tech in the branch of Computer Science and Engineering
+                Hey there! I am Pardhu Chowdary. I am a sophomore pursuing B.Tech in the branch of Computer Science and Engineering
                 at IIT, Kanpur.<br><br>
-                Java: Multi-threading, Applets, Relfection
-                WebDev using PHP
-                Machine Learning
-
+                <div id="gen-int">
+                General interests <i class="fa fa-hand-o-down"></i>
+                <ol>
+                    <li>Playing games on my PC</li>
+                    <li>Watching anime</li>
+                    <li>Watching more anime</li>
+                    <li>Hangin' out with friends</li>
+                </ol>
+                </div>
+                <div id="tech-int">
+                Technical interests <i class="fa fa-hand-o-down"></i>
+                <ol>
+                    <li>Java: Multi-threading, Reflection, Swing and Applets</li>
+                    <li>Machine Learning</li>
+                    <li>WebDev using PHP</li>
+                    <li>Quantum and Relativistic Physics</li>
+                </ol>
+                </div>
             </div>
         </section>
+
         <section id="contact-me">
-            <div id="nav-clearance">...</div>
-            <div>Email</div>
-            <div>Address</div>
-            <div>Facebook</div>
-            <div>GitHub</div>
+            <section id="nav-clearance">...</section>
+            <table>
+                <tr>
+                    <td><div>Email <i class="fa fa-envelope"></i></div></td>
+                    <td>pardhu@iitk.ac.in</td>
+                </tr>
+                <tr>
+                    <td><div>Address <i class="fa fa-road"></i></div></td>
+                    <td>B336, Hall - 10, IIT Kanpur, Kalyanpur, Kanpur.</td>
+                </tr>
+                <tr>
+                    <td><div>Facebook <i class="fa fa-facebook-square"></i></div></td>
+                    <td>Take me there</td>
+                </tr>
+                <tr>
+                    <td><div>GitHub  <i class="fa fa-github"></i>: Take me there</div></td>
+                    <td>Take me there</td>
+                </tr>
+            </table>
+            
+            
+            
+            
         </section>
         <section id="stuff">
             <div id="nav-clearance">...</div>
