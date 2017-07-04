@@ -1,11 +1,17 @@
+var llayers = [];
+var rlayers = [];
+var resetFlag = false;
+var drawId = -1;
+var REP = 20;
+var DELAY = 20;
 
 //Layer constructor function
 var layer = function(param) {
-	this.elem = [];
-	this.parallax = param.parallax;
-	this.randomFunction = param.randFunction;
-	var rf = this.randomFunction;
-	for(var i=0;i<param.num_squares;i++) {
+    this.elem = [];
+    this.parallax = param.parallax;
+    this.randomFunction = param.randFunction;
+    var rf = this.randomFunction;
+    for(var i=0;i<param.num_squares;i++) {
         var ret = {
             s: Math.round(Math.random()*(param.max_side - param.min_side) + param.min_side),
             x: Math.round(param.randomFunction()*param.width),
@@ -21,15 +27,9 @@ var layer = function(param) {
             o_grad:0
         };
         ret.fo = ret.o;
-		this.elem.push(ret);
-	}
+        this.elem.push(ret);
+    }
 };
-
-var llayers = [];
-var rlayers = [];
-var resetFlag = false;
-var REP = 20;
-var DELAY = 20;
 
 //Initiate all the squares at the starting itself: called when doc is ready
 var startup = function() {
@@ -52,7 +52,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random()*Math.random()*Math.random();
 		}
@@ -66,7 +65,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random()*Math.random()*Math.random();
 		}
@@ -82,7 +80,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.25,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random()*Math.random();
 		}
@@ -111,7 +108,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random();
 		}
@@ -125,7 +121,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random();
 		}
@@ -141,7 +136,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random();
 		}
@@ -155,50 +149,14 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random();
 		}
 	}));
 
 	$(window).scroll(drawCanvas);
-	drawCanvas();
+	drawSquares(getCurrentColor());
 };
-
-var drawLayer = function(l, e) {
-    var context = e.getContext("2d");
-    var scrollTop = $(window).scrollTop();
-    var offs = $("#content-pane").offset();
-
-    for(var i=0;i<l.elem.length;i++) {
-        var r = Math.round(l.elem[i].r);
-        var g = Math.round(l.elem[i].g);
-        var b = Math.round(l.elem[i].b);
-        if(r>255)r=255;
-        if(r<0)r=0;
-        if(b>255)b=255;
-        if(b<0)b=0;
-        if(g>255)g=255;
-        if(g<0)g=0;
-        context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
-        context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
-    }
-};
-
-var drawCanvas = function() {
-    var right = document.getElementById("right-canvas");
-    var left = document.getElementById("left-canvas");
-    var rc = document.getElementById("right-canvas").getContext("2d");
-    var lc = document.getElementById("left-canvas").getContext("2d");
-    rc.clearRect(0,0,right.width,right.height);
-    lc.clearRect(0,0,left.width,left.height);
-    for(var i=0;i<rlayers.length;i++) {
-        drawLayer(rlayers[i], right);
-        drawLayer(llayers[i], left);
-    }
-};
-
-$(document).on("ready",startup);
 
 var drawSquares = function(color) {
     for(var i=0;i<llayers.length;i++) {
@@ -206,15 +164,65 @@ var drawSquares = function(color) {
             var l = llayers[i].elem[j];
             var r = rlayers[i].elem[j];
             switch(color) {
-                case "red":
+                case "fuchsia":
                     l.r_grad = (255 - l.r)/REP;
                     r.r_grad = (255 - r.r)/REP;
 
                     l.g_grad = (0 - l.g)/REP;
                     r.g_grad = (0 - r.g)/REP;
 
+                    l.b_grad = (255 - l.b)/REP;
+                    r.b_grad = (255 - r.b)/REP;
+                    break;
+                case "sand":
+                    l.r_grad = (204 - l.r)/REP;
+                    r.r_grad = (204 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (51 - l.b)/REP;
+                    r.b_grad = (51 - r.b)/REP;
+                    break;
+                case "aqua":
+                    l.r_grad = (0 - l.r)/REP;
+                    r.r_grad = (0 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (255 - l.b)/REP;
+                    r.b_grad = (255 - r.b)/REP;
+                    break;
+                case "orange":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (165 - l.g)/REP;
+                    r.g_grad = (165 - r.g)/REP;
+
                     l.b_grad = (0 - l.b)/REP;
                     r.b_grad = (0 - r.b)/REP;
+                    break;
+                case "yellow":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (0 - l.b)/REP;
+                    r.b_grad = (0 - r.b)/REP;
+                    break;
+                case "red":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (77 - l.g)/REP;
+                    r.g_grad = (77 - r.g)/REP;
+
+                    l.b_grad = (77 - l.b)/REP;
+                    r.b_grad = (77 - r.b)/REP;
                     break;
                 case "lime":
                     l.g_grad = (255 - l.g)/REP;
@@ -256,57 +264,20 @@ var drawSquares = function(color) {
                     l.r_grad = (0 - l.r)/REP;
                     r.r_grad = (0 - r.r)/REP;
                     break;
-                case "original":
-                    resetFlag = true;
-                    l.r_grad = (l.c - l.r)/REP;
-                    r.r_grad = (r.c - r.r)/REP;
-
-                    l.g_grad = (l.c - l.g)/REP;
-                    r.g_grad = (r.c - r.g)/REP;
-
-                    l.b_grad = (l.c - l.b)/REP;
-                    r.b_grad = (r.c - r.b)/REP;
-
-                    l.o_grad = (l.o - l.fo)/REP;
-                    r.o_grad = (r.o - r.fo)/REP;
             }
-            if(color!== "original") {
-                l.o_grad = (Math.random()*(1-.6) +.6 - l.fo)/REP;
-                r.o_grad = (Math.random()*(1-.6) +.6 - r.fo)/REP;
-            }
+            l.o_grad = (Math.random()*(1-.6) +.6 - l.fo)/REP;
+            r.o_grad = (Math.random()*(1-.6) +.6 - r.fo)/REP;
         }
     }
-    
-    if(color!=="original")
-        setIntervalX(function(){
-            if(!resetFlag) {
-                for(var i=0;i<llayers.length;i++) {
-                    for(var j=0;j<llayers[i].elem.length;j++) {
-                    {
-                            var l = llayers[i].elem[j];
-                            var r = rlayers[i].elem[j];
-                            l.r += l.r_grad;
-                            r.r += l.r_grad;
-
-                            l.g += l.g_grad;
-                            r.g += r.g_grad;
-
-                            l.b += l.b_grad;
-                            r.b += r.b_grad;
-
-                            l.fo += l.o_grad;
-                            r.fo += r.o_grad;
-                        }
-                    }
-                }
-                drawCanvas();
-            }
-        }, DELAY, REP);
-    else
-        setIntervalX(function(){
+    if(drawId!==-1){
+        clearInterval(drawId);
+        drawId = -1;
+    }
+    drawId = setIntervalX(function(){
+        if(!resetFlag) {
             for(var i=0;i<llayers.length;i++) {
                 for(var j=0;j<llayers[i].elem.length;j++) {
-                     {
+                {
                         var l = llayers[i].elem[j];
                         var r = rlayers[i].elem[j];
                         l.r += l.r_grad;
@@ -324,12 +295,45 @@ var drawSquares = function(color) {
                 }
             }
             drawCanvas();
-        }, DELAY, REP, function(){resetFlag=false;});
+        }
+    }, DELAY, REP,function(){drawId=-1;});
 };
 
-function resetSquares() {
-    drawSquares("original");
-}
+var drawCanvas = function() {
+    var right = document.getElementById("right-canvas");
+    var left = document.getElementById("left-canvas");
+    var rc = right.getContext("2d");
+    var lc = left.getContext("2d");
+    rc.clearRect(0,0,right.width,right.height);
+    lc.clearRect(0,0,left.width,left.height);
+    for(var i=0;i<rlayers.length;i++) {
+        drawLayer(rlayers[i], right);
+        drawLayer(llayers[i], left);
+    }
+};
+
+var drawLayer = function(l, e) {
+    var context = e.getContext("2d");
+    var scrollTop = $(window).scrollTop();
+    var offs = $("#content-pane").offset();
+
+    for(var i=0;i<l.elem.length;i++) {
+        var r = Math.round(l.elem[i].r);
+        var g = Math.round(l.elem[i].g);
+        var b = Math.round(l.elem[i].b);
+        if(r>255)r=255;
+        if(r<0)r=0;
+        if(b>255)b=255;
+        if(b<0)b=0;
+        if(g>255)g=255;
+        if(g<0)g=0;
+        context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
+        context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
+    }
+};
+
+$(document).on("ready",startup);
+
 
 function setIntervalX(callback, delay, repetitions, endf) {
     var x = 0;
@@ -345,11 +349,6 @@ function setIntervalX(callback, delay, repetitions, endf) {
     }, delay);
     return intervalID;
 }
-
-// Reset the squares only when mouse leaves the button-pane
-$("#buttons-pane").mouseleave(function(){
-    //resetSquares();
-});
 
 // Attach event handler for each button
 $("#about-me-button").click(function(){
@@ -390,3 +389,20 @@ $("#stuff-button").click(function(){
 $("#stuff-button").mouseenter(function(){
     drawSquares("blue");
 });
+
+$("#buttons-pane").mouseleave(function(){
+    drawSquares(getCurrentColor());
+});
+
+var getCurrentColor = function() {
+    var s = $(window).scrollTop();
+    var h = $("#home").height();
+    var a = $("#about-me").height();
+    var c = $("#contact-me").height();
+    var st = $("#stuff").height();
+    console.log(s);
+    if(s<0.75*h){ console.log(0.75*h); return "lime"; }
+    if(s>0.75*h && s<h+0.75*a){ console.log(0.75*a); return "white"; }
+    if(s>h+0.75*a && s<h+a+0.75*c){ return "mediumpurple"; }
+    return "blue";
+};
