@@ -10,7 +10,6 @@ var layer = function(param) {
             s: Math.round(Math.random()*(param.max_side - param.min_side) + param.min_side),
             x: Math.round(param.randomFunction()*param.width),
             y: Math.round(Math.random()*param.height),
-            c: Math.random()*(param.max_gray - param.min_gray) + param.min_gray,
             o: (Math.random()*(param.max_opacity - param.min_opacity) + param.min_opacity),
             r: 0,
             g: 0,
@@ -21,7 +20,6 @@ var layer = function(param) {
             b_grad:0,
             o_grad:0
         };
-        ret.r = ret.g = ret.b = ret.c;
         ret.fo = ret.o;
 		this.elem.push(ret);
 	}
@@ -51,8 +49,6 @@ var startup = function() {
 		num_squares: 50,
 		max_side: 30,
 		min_side: 25,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
@@ -67,8 +63,6 @@ var startup = function() {
 		num_squares: 50,
 		max_side: 30,
 		min_side: 25,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
@@ -85,8 +79,6 @@ var startup = function() {
 		num_squares: 50,
 		max_side: 25,
 		min_side: 15,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.25,
@@ -101,8 +93,6 @@ var startup = function() {
 		num_squares: 50,
 		max_side: 25,
 		min_side: 15,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.25,
@@ -118,8 +108,6 @@ var startup = function() {
 		num_squares: 40,
 		max_side: 15,
 		min_side: 7,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
@@ -134,8 +122,6 @@ var startup = function() {
 		num_squares: 40,
 		max_side: 15,
 		min_side: 7,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
@@ -152,8 +138,6 @@ var startup = function() {
 		num_squares: 40,
 		max_side: 7,
 		min_side: 0,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
@@ -168,8 +152,6 @@ var startup = function() {
 		num_squares: 40,
 		max_side: 7,
 		min_side: 0,
-		max_gray: 220,
-		min_gray: 200,
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
@@ -181,18 +163,6 @@ var startup = function() {
 
 	$(window).scroll(drawCanvas);
 	drawCanvas();
-    setTimeout(function(){
-        $("#home-button").mouseenter();
-        setTimeout(function(){
-            $("#about-me-button").mouseenter();
-            setTimeout(function(){
-                $("#contact-button").mouseenter();
-                setTimeout(function(){
-                    $("#stuff").mouseenter();
-                },200);
-            },200);
-        },200);
-    },200);
 };
 
 var drawLayer = function(l, e) {
