@@ -52,7 +52,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random()*Math.random()*Math.random();
 		}
@@ -66,7 +65,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.5,
 		parallax: 0.01,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random()*Math.random()*Math.random();
 		}
@@ -82,7 +80,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.25,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random()*Math.random();
 		}
@@ -111,7 +108,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random();
 		}
@@ -125,7 +121,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.5,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random();
 		}
@@ -141,7 +136,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
-        grad: function(){},
 		randomFunction: function() {
 			return Math.random();
 		}
@@ -155,7 +149,6 @@ var startup = function() {
 		max_opacity: 0.8,
 		min_opacity: 0.4,
 		parallax: 0.75,
-        grad: function(){},
 		randomFunction: function() {
 			return 1-Math.random();
 		}
@@ -188,8 +181,8 @@ var drawLayer = function(l, e) {
 var drawCanvas = function() {
     var right = document.getElementById("right-canvas");
     var left = document.getElementById("left-canvas");
-    var rc = document.getElementById("right-canvas").getContext("2d");
-    var lc = document.getElementById("left-canvas").getContext("2d");
+    var rc = right.getContext("2d");
+    var lc = left.getContext("2d");
     rc.clearRect(0,0,right.width,right.height);
     lc.clearRect(0,0,left.width,left.height);
     for(var i=0;i<rlayers.length;i++) {
