@@ -155,7 +155,7 @@ var startup = function() {
 	}));
 
 	$(window).scroll(drawCanvas);
-	drawCanvas();
+	drawSquares(getCurrentColor());
 };
 
 var drawSquares = function(color) {
@@ -164,15 +164,65 @@ var drawSquares = function(color) {
             var l = llayers[i].elem[j];
             var r = rlayers[i].elem[j];
             switch(color) {
-                case "red":
+                case "fuchsia":
                     l.r_grad = (255 - l.r)/REP;
                     r.r_grad = (255 - r.r)/REP;
 
                     l.g_grad = (0 - l.g)/REP;
                     r.g_grad = (0 - r.g)/REP;
 
+                    l.b_grad = (255 - l.b)/REP;
+                    r.b_grad = (255 - r.b)/REP;
+                    break;
+                case "sand":
+                    l.r_grad = (204 - l.r)/REP;
+                    r.r_grad = (204 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (51 - l.b)/REP;
+                    r.b_grad = (51 - r.b)/REP;
+                    break;
+                case "aqua":
+                    l.r_grad = (0 - l.r)/REP;
+                    r.r_grad = (0 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (255 - l.b)/REP;
+                    r.b_grad = (255 - r.b)/REP;
+                    break;
+                case "orange":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (165 - l.g)/REP;
+                    r.g_grad = (165 - r.g)/REP;
+
                     l.b_grad = (0 - l.b)/REP;
                     r.b_grad = (0 - r.b)/REP;
+                    break;
+                case "yellow":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (255 - l.g)/REP;
+                    r.g_grad = (255 - r.g)/REP;
+
+                    l.b_grad = (0 - l.b)/REP;
+                    r.b_grad = (0 - r.b)/REP;
+                    break;
+                case "red":
+                    l.r_grad = (255 - l.r)/REP;
+                    r.r_grad = (255 - r.r)/REP;
+
+                    l.g_grad = (77 - l.g)/REP;
+                    r.g_grad = (77 - r.g)/REP;
+
+                    l.b_grad = (77 - l.b)/REP;
+                    r.b_grad = (77 - r.b)/REP;
                     break;
                 case "lime":
                     l.g_grad = (255 - l.g)/REP;
@@ -339,3 +389,20 @@ $("#stuff-button").click(function(){
 $("#stuff-button").mouseenter(function(){
     drawSquares("blue");
 });
+
+$("#buttons-pane").mouseleave(function(){
+    drawSquares(getCurrentColor());
+});
+
+var getCurrentColor = function() {
+    var s = $(window).scrollTop();
+    var h = $("#home").height();
+    var a = $("#about-me").height();
+    var c = $("#contact-me").height();
+    var st = $("#stuff").height();
+    console.log(s);
+    if(s<0.75*h){ console.log(0.75*h); return "lime"; }
+    if(s>0.75*h && s<h+0.75*a){ console.log(0.75*a); return "white"; }
+    if(s>h+0.75*a && s<h+a+0.75*c){ return "mediumpurple"; }
+    return "blue";
+};
