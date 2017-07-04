@@ -1,11 +1,17 @@
+var llayers = [];
+var rlayers = [];
+var resetFlag = false;
+var drawId = -1;
+var REP = 20;
+var DELAY = 20;
 
 //Layer constructor function
 var layer = function(param) {
-	this.elem = [];
-	this.parallax = param.parallax;
-	this.randomFunction = param.randFunction;
-	var rf = this.randomFunction;
-	for(var i=0;i<param.num_squares;i++) {
+    this.elem = [];
+    this.parallax = param.parallax;
+    this.randomFunction = param.randFunction;
+    var rf = this.randomFunction;
+    for(var i=0;i<param.num_squares;i++) {
         var ret = {
             s: Math.round(Math.random()*(param.max_side - param.min_side) + param.min_side),
             x: Math.round(param.randomFunction()*param.width),
@@ -21,15 +27,9 @@ var layer = function(param) {
             o_grad:0
         };
         ret.fo = ret.o;
-		this.elem.push(ret);
-	}
+        this.elem.push(ret);
+    }
 };
-
-var llayers = [];
-var rlayers = [];
-var resetFlag = false;
-var REP = 20;
-var DELAY = 20;
 
 //Initiate all the squares at the starting itself: called when doc is ready
 var startup = function() {
@@ -158,41 +158,6 @@ var startup = function() {
 	drawCanvas();
 };
 
-var drawLayer = function(l, e) {
-    var context = e.getContext("2d");
-    var scrollTop = $(window).scrollTop();
-    var offs = $("#content-pane").offset();
-
-    for(var i=0;i<l.elem.length;i++) {
-        var r = Math.round(l.elem[i].r);
-        var g = Math.round(l.elem[i].g);
-        var b = Math.round(l.elem[i].b);
-        if(r>255)r=255;
-        if(r<0)r=0;
-        if(b>255)b=255;
-        if(b<0)b=0;
-        if(g>255)g=255;
-        if(g<0)g=0;
-        context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
-        context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
-    }
-};
-
-var drawCanvas = function() {
-    var right = document.getElementById("right-canvas");
-    var left = document.getElementById("left-canvas");
-    var rc = right.getContext("2d");
-    var lc = left.getContext("2d");
-    rc.clearRect(0,0,right.width,right.height);
-    lc.clearRect(0,0,left.width,left.height);
-    for(var i=0;i<rlayers.length;i++) {
-        drawLayer(rlayers[i], right);
-        drawLayer(llayers[i], left);
-    }
-};
-
-$(document).on("ready",startup);
-
 var drawSquares = function(color) {
     for(var i=0;i<llayers.length;i++) {
         for(var j=0;j<llayers[i].elem.length;j++) {
@@ -254,8 +219,11 @@ var drawSquares = function(color) {
             r.o_grad = (Math.random()*(1-.6) +.6 - r.fo)/REP;
         }
     }
-
-    setIntervalX(function(){
+    if(drawId!==-1){
+        clearInterval(drawId);
+        drawId = -1;
+    }
+    drawId = setIntervalX(function(){
         if(!resetFlag) {
             for(var i=0;i<llayers.length;i++) {
                 for(var j=0;j<llayers[i].elem.length;j++) {
@@ -278,12 +246,44 @@ var drawSquares = function(color) {
             }
             drawCanvas();
         }
-    }, DELAY, REP);
+    }, DELAY, REP,function(){drawId=-1;});
 };
 
-function resetSquares() {
-    drawSquares("original");
-}
+var drawCanvas = function() {
+    var right = document.getElementById("right-canvas");
+    var left = document.getElementById("left-canvas");
+    var rc = right.getContext("2d");
+    var lc = left.getContext("2d");
+    rc.clearRect(0,0,right.width,right.height);
+    lc.clearRect(0,0,left.width,left.height);
+    for(var i=0;i<rlayers.length;i++) {
+        drawLayer(rlayers[i], right);
+        drawLayer(llayers[i], left);
+    }
+};
+
+var drawLayer = function(l, e) {
+    var context = e.getContext("2d");
+    var scrollTop = $(window).scrollTop();
+    var offs = $("#content-pane").offset();
+
+    for(var i=0;i<l.elem.length;i++) {
+        var r = Math.round(l.elem[i].r);
+        var g = Math.round(l.elem[i].g);
+        var b = Math.round(l.elem[i].b);
+        if(r>255)r=255;
+        if(r<0)r=0;
+        if(b>255)b=255;
+        if(b<0)b=0;
+        if(g>255)g=255;
+        if(g<0)g=0;
+        context.fillStyle = "rgba("+r+","+g+","+b+","+l.elem[i].fo+")";
+        context.fillRect(l.elem[i].x, l.elem[i].y + l.parallax * scrollTop, l.elem[i].s, l.elem[i].s);
+    }
+};
+
+$(document).on("ready",startup);
+
 
 function setIntervalX(callback, delay, repetitions, endf) {
     var x = 0;
@@ -299,11 +299,6 @@ function setIntervalX(callback, delay, repetitions, endf) {
     }, delay);
     return intervalID;
 }
-
-// Reset the squares only when mouse leaves the button-pane
-$("#buttons-pane").mouseleave(function(){
-    //resetSquares();
-});
 
 // Attach event handler for each button
 $("#about-me-button").click(function(){
