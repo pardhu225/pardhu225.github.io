@@ -155,7 +155,7 @@ var startup = function() {
 	}));
 
 	$(window).scroll(drawCanvas);
-	drawSquares(getCurrentColor());
+	drawSquares("lime");
 };
 
 var drawSquares = function(color) {
