@@ -249,57 +249,17 @@ var drawSquares = function(color) {
                     l.r_grad = (0 - l.r)/REP;
                     r.r_grad = (0 - r.r)/REP;
                     break;
-                case "original":
-                    resetFlag = true;
-                    l.r_grad = (l.c - l.r)/REP;
-                    r.r_grad = (r.c - r.r)/REP;
-
-                    l.g_grad = (l.c - l.g)/REP;
-                    r.g_grad = (r.c - r.g)/REP;
-
-                    l.b_grad = (l.c - l.b)/REP;
-                    r.b_grad = (r.c - r.b)/REP;
-
-                    l.o_grad = (l.o - l.fo)/REP;
-                    r.o_grad = (r.o - r.fo)/REP;
             }
-            if(color!== "original") {
-                l.o_grad = (Math.random()*(1-.6) +.6 - l.fo)/REP;
-                r.o_grad = (Math.random()*(1-.6) +.6 - r.fo)/REP;
-            }
+            l.o_grad = (Math.random()*(1-.6) +.6 - l.fo)/REP;
+            r.o_grad = (Math.random()*(1-.6) +.6 - r.fo)/REP;
         }
     }
-    
-    if(color!=="original")
-        setIntervalX(function(){
-            if(!resetFlag) {
-                for(var i=0;i<llayers.length;i++) {
-                    for(var j=0;j<llayers[i].elem.length;j++) {
-                    {
-                            var l = llayers[i].elem[j];
-                            var r = rlayers[i].elem[j];
-                            l.r += l.r_grad;
-                            r.r += l.r_grad;
 
-                            l.g += l.g_grad;
-                            r.g += r.g_grad;
-
-                            l.b += l.b_grad;
-                            r.b += r.b_grad;
-
-                            l.fo += l.o_grad;
-                            r.fo += r.o_grad;
-                        }
-                    }
-                }
-                drawCanvas();
-            }
-        }, DELAY, REP);
-    else
-        setIntervalX(function(){
+    setIntervalX(function(){
+        if(!resetFlag) {
             for(var i=0;i<llayers.length;i++) {
                 for(var j=0;j<llayers[i].elem.length;j++) {
-                     {
+                {
                         var l = llayers[i].elem[j];
                         var r = rlayers[i].elem[j];
                         l.r += l.r_grad;
@@ -317,7 +277,8 @@ var drawSquares = function(color) {
                 }
             }
             drawCanvas();
-        }, DELAY, REP, function(){resetFlag=false;});
+        }
+    }, DELAY, REP);
 };
 
 function resetSquares() {
