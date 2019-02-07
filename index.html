@@ -8,179 +8,160 @@
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-	<style type="text/css">
-        @font-face {
-            font-family: "Simplifica";
-            src: url(css/simplifica.woff) format("truetype");
-        }
-		body {
-			font-family: arial;
-			padding: 0;
-			margin:0;
-			height:100%;
-            background-color: black;
-        }
-        
-		#nav-clearance {
-			height:2em;
-            text-align: center !important;
-		}
-        
-        /* The styles for the parallax canvas */
-        #right-canvas {
-			position:absolute;
-			top:0;
-			right:0;
-			z-index: -1;
-            background-color: black;
-		}
-		#left-canvas {
-			position: absolute;
-			top: 0;
-			left:0;
-			z-index:-1;
-            background-color: black;
-		}
-        
-        #home, #about-me, #contact-me,
-        #stuff{
-            height: 100vh;
-            text-align: center;
-            font-size: 1em;
-        }
-        
-        #home, #home-button {color: lime;}
-        #home-button:hover {background-color:  rgba(32, 128, 0, 0.5);}
-        
-        #contact-me, #contact-button {color: mediumpurple;}
-        #contact-button:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
-        
-        #about-me, #about-me-button {color: white;}
-        #about-me-button:hover {transition: 0.2s;background-color: rgba(255 , 255, 255, 0.5);}
-        
-        #stuff,#stuff-button {color: blue;}
-        #stuff-button:hover {background-color: rgba(0, 0, 128,0.5);}
-        
-        #content-pane {
-			margin-left:20vw;
-			width:60vw;
-			margin-right: 20vw;
-            background-color: rgba(0,0,0,0.5);
-            border: 1px solid #111;
-		}
-        #buttons-pane { 
-            position: fixed;
-            left:80vw;
-            top:20vh;
-            background-color: rgba(0,0,0,0.5);
-            border: 1px solid #111;
-            width:20vw;
-        }
-        #buttons-pane ul {
-            list-style-type: none;
-            color:white;
-            text-align: center;
-        }
-        #buttons-pane ul li {
-            width: 100% !important;
-            font-size: 1.3em;
-            cursor: pointer;
-            padding-top: 1em;
-            padding-bottom: 1em;
-            margin: 20px 0px;
-            overflow: hidden;
-            border-radius: 25px;
-        }
-        #buttons-pane ul li span {
-            float: left;
-            padding:1.2em;
-            padding-left: 1.4em;
-            position: absolute;
-            left:0;
-            top:0;
-        }
+		<style type="text/css">
+			body {
+					font-family: arial;
+					padding: 0;
+					margin:0;
+					height:100%;
+		      background-color: black;
+		  }
 
-        #heading {
-            font-family: 'Simplifica';
-            font-variant: small-caps;
-            color: lime;
-            font-size: 5em;
-            letter-spacing: 5px;
-        }
-        #banner {
-            margin-top:30vh;
-        }
-        #banner-img {
-            margin-top: 10%;
-            margin-bottom: 5%; 
-        }
-        #banner-img img {
-            height: 150px;
-            width: 150px;
-            border-radius: 75px;
-            border: solid 1px white;
-        }
-        #about-me #specs {
-            font-size: 1.3em;
-        }
-        #contact-me {
-            height: auto;
-            padding: 20px;
-            font-size: 1.5em;
-            text-align: left;
-        }
-        #contact-me div {
-            margin: 15px;
-            padding-left: 25px;
-            text-align: right;
-        }
-        #about-me{
-            background-color: rgba(60,60,60,0.3);
-            padding: 0px 10px;
-            letter-spacing: 0.5px;
-            font-family: "Julius Sans One", sans-serif;
-            font-size: 1.1em;
-        }
-        #about-me-button{
-            font-family: "Gloria Hallelujah" , cursive;
-            font-size: 1.1em;
-        }
-        ol li {
-            font-family: "Architects Daughter", cursive;
-            font-size: 1.1em;
-            font-weight: 600;
-            text-align: center;
-            color: #ccc;
-            background-color: #777;
-            margin: 7px;
-            padding: 7px;
-            list-style-type: none;
-            border-top-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            border-top-right-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
-        ol li:nth-child(even) {
-            background-color: #333;
-        }
-        #tech-int {
-            display: inline-table;
-            width: 45%;
-        }
-        #gen-int {
-            display: inline-table;
-            width:45%;
-        }
-        /*ol li:before {content: counter(li); color: mediumpurple;
-        display: inline-block; width: 1em; margin-left: -1.5em;
-        margin-right: 0.5em; text-align: right; direction: rtl}
+			#nav-clearance {
+					height:2em;
+		      text-align: center !important;
+			}
+
+		  /* The styles for the parallax canvas */
+			canvas {
+					position:absolute;
+					top:0;
+					z-index: -1;
+		      background-color: black;
+			}
+		 	#right-canvas {	right:0 }
+			#left-canvas { left:0 }
+
+		  .content {
+		      height: 100vh;
+		      text-align: center;
+		      font-size: 1em;
+		  }
+
+		  #home, #home-button {color: lime;}
+		  #home-button:hover {background-color:  rgba(32, 128, 0, 0.5);}
+
+		  #contact-me, #contact-button {color: mediumpurple;}
+		  #contact-button:hover {transition: 0.2s;background-color: rgba(41, 20, 82,0.5);}
+
+		  #about-me, #about-me-button {color: white;}
+		  #about-me-button:hover {transition: 0.2s;background-color: rgba(255 , 255, 255, 0.5);}
+
+		  #stuff,#stuff-button {color: blue;}
+		  #stuff-button:hover {background-color: rgba(0, 0, 128,0.5);}
+
+		  #content-pane {
+					margin-left:20vw;
+					width:60vw;
+					margin-right: 20vw;
+		      background-color: rgba(0,0,0,0.5);
+		      border: 1px solid #111;
+			}
+		  #buttons-pane {
+		      position: fixed;
+		      left:80vw;
+		      top:20vh;
+		      background-color: rgba(0,0,0,0.5);
+		      border: 1px solid #111;
+		      width:20vw;
+		  }
+		  #buttons-pane ul {
+		      list-style-type: none;
+		      color:white;
+		      text-align: center;
+		  }
+		  #buttons-pane ul li {
+		      width: 100% !important;
+		      font-size: 1.3em;
+		      cursor: pointer;
+		      padding-top: 1em;
+		      padding-bottom: 1em;
+		      margin: 20px 0px;
+		      overflow: hidden;
+		      border-radius: 25px;
+		  }
+		  #buttons-pane ul li span {
+		      float: left;
+		      padding:1.2em;
+		      padding-left: 1.4em;
+		      position: absolute;
+		      left:0;
+		      top:0;
+		  }
+
+		  #heading {
+		      font-family: 'Simplifica';
+		      font-variant: small-caps;
+		      color: lime;
+		      font-size: 5em;
+		      letter-spacing: 5px;
+		  }
+		  #banner {
+		      margin-top:30vh;
+		  }
+		  #banner-img {
+		      margin-top: 10%;
+		      margin-bottom: 5%;
+		  }
+		  #banner-img img {
+		      height: 150px;
+		      width: 150px;
+		      border-radius: 75px;
+		      border: solid 1px white;
+		  }
+		  #about-me #specs {
+		      font-size: 1.3em;
+		  }
+		  #contact-me {
+		      height: auto;
+		      padding: 20px;
+		      font-size: 1.5em;
+		      text-align: left;
+		  }
+		  #contact-me div {
+		      margin: 15px;
+		      padding-left: 25px;
+		      text-align: right;
+		  }
+		  #about-me{
+		      background-color: rgba(60,60,60,0.3);
+		      padding: 0px 10px;
+		      letter-spacing: 0.5px;
+		      font-family: "Julius Sans One", sans-serif;
+		      font-size: 1.1em;
+		  }
+		  #about-me-button{
+		      font-family: "Gloria Hallelujah" , cursive;
+		      font-size: 1.1em;
+		  }
+		  ol li {
+		      font-family: "Architects Daughter", cursive;
+		      font-size: 1.1em;
+		      font-weight: 600;
+		      text-align: center;
+		      color: #ccc;
+		      background-color: #777;
+		      margin: 7px;
+		      padding: 7px;
+		      list-style-type: none;
+		      border-top-left-radius: 15px;
+		      border-bottom-right-radius: 15px;
+		      border-top-right-radius: 5px;
+		      border-bottom-left-radius: 5px;
+		  }
+		  ol li:nth-child(even) {
+		      background-color: #333;
+		  }
+		  #tech-int, #gen-int {
+		      display: inline-table;
+		      width: 45%;
+		  }
 	</style>
-    
+
 </head>
 <body>
-    
     <canvas width="500px" id="right-canvas" crossorigin="anonymous"></canvas>
-	<canvas width="500px" id="left-canvas" crossorigin="anonymous"></canvas>
+		<canvas width="500px" id="left-canvas" crossorigin="anonymous"></canvas>
 
     <section id="buttons-pane">
         <ul>
@@ -190,8 +171,9 @@
             <li id="stuff-button" class="waves-effect waves-light"><span class="fa fa-exclamation-circle"></span>IIT ka maal</li>
         </ul>
     </section>
+
     <section id="content-pane">
-        <section id="home">
+        <section id="home" class="content">
         	<div id="nav-clearance">...</div>
             <div id="banner">
                 <div id="heading">
@@ -199,7 +181,8 @@
                 </div>
             </div>
         </section>
-        <section id="about-me">
+
+        <section id="about-me" class="content">
             <div id="nav-clearance">...</div>
             <div id="specs">
                 <div id="banner-img">
@@ -229,7 +212,7 @@
             </div>
         </section>
 
-        <section id="contact-me">
+        <section id="contact-me" class="content">
             <section id="nav-clearance">...</section>
             <table>
                 <tr>
@@ -249,18 +232,16 @@
                     <td><a href="https://github.com/pardhu225">Take me there</a></td>
                 </tr>
             </table>
-            
-            
-            
-            
         </section>
-        <section id="stuff">
+
+				<section id="stuff" class="content">
             <div id="nav-clearance">...</div>
             Stuff will bedisplayed here
         </section>
     </section>
+
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="iparallax.js"></script>
+		<script src="iparallax.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 </body>
-</html> 
+</html>

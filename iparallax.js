@@ -310,12 +310,12 @@ var drawCanvas = function() {
         drawLayer(rlayers[i], right);
         drawLayer(llayers[i], left);
     }
+    drawSquares(getCurrentColor());
 };
 
 var drawLayer = function(l, e) {
     var context = e.getContext("2d");
     var scrollTop = $(window).scrollTop();
-    var offs = $("#content-pane").offset();
 
     for(var i=0;i<l.elem.length;i++) {
         var r = Math.round(l.elem[i].r);
@@ -355,7 +355,7 @@ $("#about-me-button").click(function(){
     var offset = $("#about-me").offset().top;
     var st = $('html, body').attr('scrollTop');
     $('html, body').animate({"scrollTop": offset},1000);
-    
+
 });
 $("#about-me-button").mouseenter(function(){
     drawSquares("white");
@@ -400,9 +400,8 @@ var getCurrentColor = function() {
     var a = $("#about-me").height();
     var c = $("#contact-me").height();
     var st = $("#stuff").height();
-    console.log(s);
-    if(s<0.75*h){ console.log(0.75*h); return "lime"; }
-    if(s>0.75*h && s<h+0.75*a){ console.log(0.75*a); return "white"; }
+    if(s<0.75*h){ return "lime"; }
+    if(s>0.75*h && s<h+0.75*a){  return "white"; }
     if(s>h+0.75*a && s<h+a+0.75*c){ return "mediumpurple"; }
     return "blue";
 };
